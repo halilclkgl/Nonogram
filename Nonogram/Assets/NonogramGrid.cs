@@ -16,6 +16,7 @@ public class NonogramGrid : MonoBehaviour
     int gridSize = 4;
     private int mouseColors;
     public int health = 3;
+    public PlayerHealth playerHealth;
     private void Start()
     {
         mouseColors = 1;
@@ -142,6 +143,7 @@ public class NonogramGrid : MonoBehaviour
                 IsArraysEqual(solutionArray, cellValues);
                 if (IsArraysEqual(solutionArray, cellValues))
                 {
+                    playerHealth.YouWin();
                     Debug.Log("KAZANDIN");
                 }
             }
@@ -150,25 +152,17 @@ public class NonogramGrid : MonoBehaviour
                 cellValues[row, col] = false;
                 spriteRenderer.color = Color.white;
                
-                if (IsArraysEqual(solutionArray, cellValues))
+                if (IsArraysEqual(solutionArray,cellValues))
                 {
-                    Debug.Log("KAZANDIN");
+                    playerHealth.YouWin();
                 }
             }
             else
             {
-                Debug.Log("Yanlýþ!!!");
-                health--;
-                if (health == 0)
-                {
-                    Debug.Log("Game Over !");
-                }
+                playerHealth.TakeDamage();
             }
            
         }
-      
-       
-
     }
     private bool IsArraysEqual(bool[,] array1, bool[,] array2)
     {
