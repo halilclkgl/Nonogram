@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,16 +21,16 @@ public class NonogramGrid : MonoBehaviour
     {
         mouseColors = 1;
         solutionArray = GenerateRandomSolution();
-        // Hücre değerleri için 2D array'i oluşturun
+        // HÃ¼cre deÃ°erleri iÃ§in 2D array'i oluÃ¾turun
         cellValues = new bool[gridSize, gridSize];
 
-        // Hücre objelerini array'e atayın
+        // HÃ¼cre objelerini array'e atayÃ½n
         cellObjects = new GameObject[gridSize * gridSize];
 
         for (int row = 0; row < gridSize; row++)
         {
-            List<int> hintValues = new List<int>(); // İpucu değerlerini tutacak liste
-            int consecutiveTrueCount = 0; // Ardışık true sayısını tutacak değişken
+            List<int> hintValues = new List<int>(); // Ãpucu deÃ°erlerini tutacak liste
+            int consecutiveTrueCount = 0; // ArdÃ½Ã¾Ã½k true sayÃ½sÃ½nÃ½ tutacak deÃ°iÃ¾ken
 
             for (int col = 0; col < gridSize; col++)
             {
@@ -56,15 +56,15 @@ public class NonogramGrid : MonoBehaviour
                 hintValues.Add(consecutiveTrueCount);
             }
 
-            // İpucu değerlerini text kutusuna aktar
+            // Ãpucu deÃ°erlerini text kutusuna aktar
             string hintString = string.Join(" ", hintValues.ToArray());
             hintTexts[row].text = hintString;
 
         }
         for (int row = 0; row < gridSize; row++)
         {
-            List<int> hintValues = new List<int>(); // İpucu değerlerini tutacak liste
-            int consecutiveTrueCount = 0; // Ardışık true sayısını tutacak değişken
+            List<int> hintValues = new List<int>(); // Ãpucu deÃ°erlerini tutacak liste
+            int consecutiveTrueCount = 0; // ArdÃ½Ã¾Ã½k true sayÃ½sÃ½nÃ½ tutacak deÃ°iÃ¾ken
 
             for (int col = 0; col < gridSize; col++)
             {
@@ -87,7 +87,7 @@ public class NonogramGrid : MonoBehaviour
                 hintValues.Add(consecutiveTrueCount);
             }
 
-            string hintString = string.Join(" ", hintValues.ToArray()); // İpucu değerlerini birleştirerek string haline getirme
+            string hintString = string.Join(" ", hintValues.ToArray()); // Ãpucu deÃ°erlerini birleÃ¾tirerek string haline getirme
             hintTexts2[row].text = hintString;
         }
 
@@ -98,12 +98,12 @@ public class NonogramGrid : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            // Tıklanan pozisyonu dünya koordinatlarından grid içindeki hücre konumuna çevir
+            // TÃ½klanan pozisyonu dÃ¼nya koordinatlarÃ½ndan grid iÃ§indeki hÃ¼cre konumuna Ã§evir
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             int row = Mathf.FloorToInt(mousePosition.x);
             int col = Mathf.FloorToInt(mousePosition.y);
 
-            // Hücrenin durumunu değiştir
+            // HÃ¼crenin durumunu deÃ°iÃ¾tir
             // ToggleCell(row, col);
             UpdateCellVisuals();
 
@@ -116,7 +116,7 @@ public class NonogramGrid : MonoBehaviour
         {
             for (int col = 0; col < gridSize; col++)
             {
-                array[row, col] = Random.value < 0.5f; // %50 olasılıkla true veya false
+                array[row, col] = Random.value < 0.5f; // %50 olasÃ½lÃ½kla true veya false
             }
         }
         return array;
@@ -143,7 +143,7 @@ public class NonogramGrid : MonoBehaviour
                 IsArraysEqual(solutionArray, cellValues);
                 if (IsArraysEqual(solutionArray, cellValues))
                 {
-                    playerHealth.YouWin();
+                  //  playerHealth.YouWin();
                     Debug.Log("KAZANDIN");
                 }
             }
@@ -151,24 +151,24 @@ public class NonogramGrid : MonoBehaviour
             {
                 cellValues[row, col] = false;
                 spriteRenderer.color = Color.white;
-               
-                if (IsArraysEqual(solutionArray,cellValues))
+
+                if (IsArraysEqual(solutionArray, cellValues))
                 {
-                    playerHealth.YouWin();
+                   // playerHealth.YouWin();
                 }
             }
             else
             {
                 playerHealth.TakeDamage();
             }
-           
+
         }
     }
     private bool IsArraysEqual(bool[,] array1, bool[,] array2)
     {
         if (array1.GetLength(0) != array2.GetLength(0) || array1.GetLength(1) != array2.GetLength(1))
         {
-            // Boyutlar farklı, diziler eşit değil
+            // Boyutlar farklÃ½, diziler eÃ¾it deÃ°il
             return false;
         }
 
@@ -178,13 +178,13 @@ public class NonogramGrid : MonoBehaviour
             {
                 if (array1[i, j] != array2[i, j])
                 {
-                    // Değerler farklı, diziler eşit değil
+                    // DeÃ°erler farklÃ½, diziler eÃ¾it deÃ°il
                     return false;
                 }
             }
         }
 
-        // Tüm değerler aynı, diziler eşit
+        // TÃ¼m deÃ°erler aynÃ½, diziler eÃ¾it
         return true;
     }
     public void MouseColor(int a)
